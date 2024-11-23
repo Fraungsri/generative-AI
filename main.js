@@ -1,4 +1,6 @@
-const OPENAI_API_KEY = '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'; // Replace with your actual API key
+const OPENAI_API_KEY = process.env.API_KEY; // Replace with your actual API key
+
+
 
 function logSuggestion(userDescription) {
     fetch('https://api.openai.com/v1/chat/completions', {
