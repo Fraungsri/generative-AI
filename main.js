@@ -1,4 +1,4 @@
-const OPENAI_API = process.env.API_KEY; // Replace with your actual API key
+const OPENAI_API_KEY = 'process.env.API_KEY'; // Replace with your actual API key
 
 
 
@@ -7,7 +7,7 @@ function logSuggestion(userDescription) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENAI_API}`
+            'Authorization': `Bearer ${OPENAI_API_KEY}`
         },
         body: JSON.stringify({
             model: 'gpt-4',
@@ -45,7 +45,7 @@ function generateImage(userDescription) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${OPENAI_API}`
+            'Authorization': `Bearer ${OPENAI_API_KEY}`
         },
         body: JSON.stringify({
             prompt: `A creative and funny illustration based on the following description: "${userDescription}".`,
