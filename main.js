@@ -1,4 +1,5 @@
-const OPENAI_API_KEY = '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';
+const OPENAI_API_KEY = process.env.API_KEY;
+require('dotenv').config();
 
 function logSuggestion(userDescription) {
     // Show loading state
