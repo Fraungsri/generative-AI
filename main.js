@@ -13,7 +13,7 @@ function logSuggestion(userDescription) {
         return;
     }
 
-    // Show loading state
+    // Show loading
     showLoading();
 
     fetch('https://api.openai.com/v1/chat/completions', {
@@ -74,7 +74,7 @@ function generateImage(userDescription, OPENAI_API_KEY) {
         });
 }
 
-// Show loading indicator
+// Show loading
 function showLoading() {
     document.querySelector("#story").textContent = "Loading story... Please wait.";
     const imageElement = document.querySelector("#story-image");
@@ -84,7 +84,7 @@ function showLoading() {
 
 // Hide loading indicators
 function hideLoading() {
-    // Hide the loading spinner after the request is completed
+    // Hide the loading spinner after  request is completed
 }
 
 // Event listener for the "Generate" button
