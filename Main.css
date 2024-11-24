@@ -40,6 +40,15 @@ header h1{
     margin-right: auto;
 }
 
+.api-section {
+    text-align: center;
+    margin: 1rem auto;
+    padding: 1rem;
+
+
+    max-width: 300px;
+
+}
 /* Input Section */
 .input-section {
     text-align: center;

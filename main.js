@@ -1,7 +1,18 @@
-const OPENAI_API_KEY = process.env.API_KEY;
-require('dotenv').config();
+// Function to fetch the API key from the input field
+function getApiKey() {
+    return document.querySelector("#api-key").value;
+}
 
 function logSuggestion(userDescription) {
+    // Get the API Key from input
+    const OPENAI_API_KEY = getApiKey();
+
+    // Check if the API Key is provided
+    if (!OPENAI_API_KEY) {
+        alert("Please enter your OpenAI API key.");
+        return;
+    }
+
     // Show loading state
     showLoading();
 
@@ -25,7 +36,7 @@ function logSuggestion(userDescription) {
             document.querySelector("#story").textContent = story;
 
             // Fetching the image after getting story
-            return generateImage(userDescription);
+            return generateImage(userDescription, OPENAI_API_KEY);
         })
         .then(imageUrl => {
             const imageElement = document.querySelector("#story-image");
@@ -44,7 +55,7 @@ function logSuggestion(userDescription) {
         });
 }
 
-function generateImage(userDescription) {
+function generateImage(userDescription, OPENAI_API_KEY) {
     return fetch('https://api.openai.com/v1/images/generations', {
         method: 'POST',
         headers: {
@@ -59,7 +70,7 @@ function generateImage(userDescription) {
     })
         .then(response => response.json())
         .then(imageData => {
-            return imageData.data[0].url; // Return generated image URL
+            return imageData.data[0].url;  // Return generated image URL
         });
 }
 
@@ -67,15 +78,16 @@ function generateImage(userDescription) {
 function showLoading() {
     document.querySelector("#story").textContent = "Loading story... Please wait.";
     const imageElement = document.querySelector("#story-image");
-    imageElement.src = "https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator_square_large.gif"; // Replace with a local loading spinner or placeholder image
+    imageElement.src = "https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator_square_large.gif"; // Loading spinner
     imageElement.alt = "Loading image...";
 }
 
 // Hide loading indicators
 function hideLoading() {
+    // Hide the loading spinner after the request is completed
 }
 
-// Event listener for the button
+// Event listener for the "Generate" button
 document.querySelector("#generate-btn").addEventListener("click", function () {
     const descriptionInput = document.querySelector("#description").value;
     if (!descriptionInput) {
