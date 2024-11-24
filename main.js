@@ -1,8 +1,9 @@
-const OPENAI_API_KEY = 'process.env.API_KEY'; // Replace with your actual API key
-
-
+const OPENAI_API_KEY = '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';
 
 function logSuggestion(userDescription) {
+    // Show loading state
+    showLoading();
+
     fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
@@ -20,23 +21,25 @@ function logSuggestion(userDescription) {
         .then(response => response.json())
         .then(suggestionData => {
             const story = suggestionData.choices[0].message.content;
-            console.log("Generated Story:", story);
-
-            // Displaying the story
             document.querySelector("#story").textContent = story;
 
-            // Fetching the image after getting the story
+            // Fetching the image after getting story
             return generateImage(userDescription);
         })
         .then(imageUrl => {
-            // Display the image
             const imageElement = document.querySelector("#story-image");
             imageElement.src = imageUrl;
             imageElement.alt = "Generated Image";
+
+            // Hide loading state
+            hideLoading();
         })
         .catch(error => {
             console.error("Error:", error);
             alert("Something went wrong. Please try again.");
+
+            // Hide loading state even on error
+            hideLoading();
         });
 }
 
@@ -53,34 +56,31 @@ function generateImage(userDescription) {
             size: "512x512"
         })
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Image API Error: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(imageData => {
-            const imageUrl = imageData.data[0].url; // Get the image URL
-            console.log("Generated Image URL:", imageUrl);
-            return imageUrl; // Return the URL in case you need it elsewhere
-        })
-        .catch(error => {
-            console.error("Error generating image:", error);
-            alert("Failed to generate an image. Please try again.");
+            return imageData.data[0].url; // Return generated image URL
         });
 }
 
-// Event listener for the button
-const button = document.querySelector("button");
-const inputElement = document.querySelector("input");
+// Show loading indicator
+function showLoading() {
+    document.querySelector("#story").textContent = "Loading story... Please wait.";
+    const imageElement = document.querySelector("#story-image");
+    imageElement.src = "https://raw.githubusercontent.com/Codelessly/FlutterLoadingGIFs/master/packages/cupertino_activity_indicator_square_large.gif"; // Replace with a local loading spinner or placeholder image
+    imageElement.alt = "Loading image...";
+}
 
-button.addEventListener("click", function () {
-    const valueInputted = inputElement.value; // Get the user input
-    if (!valueInputted) {
+// Hide loading indicators
+function hideLoading() {
+}
+
+// Event listener for the button
+document.querySelector("#generate-btn").addEventListener("click", function () {
+    const descriptionInput = document.querySelector("#description").value;
+    if (!descriptionInput) {
         alert("Please enter a description!");
         return;
     }
 
-    console.log("User Input:", valueInputted);
-    logSuggestion(valueInputted); // Call logSuggestion once with the user input
+    logSuggestion(descriptionInput);
 });

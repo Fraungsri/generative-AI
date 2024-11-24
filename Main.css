@@ -7,24 +7,26 @@
 
 /* Body and Typography */
 body {
-    font-family:'Inter', sans-serif;
-    background-color: #101014;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
     color: #f4f4f4;
     line-height: 1.6;
     margin: 0;
     text-align: center;
+    min-height: 100vh;
 }
 
+header h1{
+    font-size: 4rem;
+}
 /* Hero Section */
 .hero {
     text-align: center;
     padding: 4rem 2rem;
-    background: linear-gradient(180deg, #2B2B33, #101014);
-    color: #ffffff;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
@@ -43,7 +45,9 @@ body {
     text-align: center;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: #1c1c24;
+    background-color: #000;
+    color: #fff;
+    opacity: 0.5;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     max-width: 600px;
@@ -57,7 +61,7 @@ body {
 
 .input-section p {
     margin-bottom: 1.5rem;
-    color: #b3b3b3;
+    color: #eaeaea;
 }
 
 input[type="text"] {
@@ -74,7 +78,7 @@ button {
     font-size: 1rem;
     font-weight: 600;
     color: #fff;
-    background-color: #ff751a;
+    background-color: #da3e91;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -109,8 +113,9 @@ h2 {
     padding: 1rem;
     border: 1px solid #3a3a44;
     border-radius: 6px;
-    background-color: #16161d;
-    color: #b3b3b3;
+    background-color: #000;
+    color: #fff;
+    opacity: 0.5;
     margin-bottom: 1rem;
 }
 
@@ -119,13 +124,13 @@ h2 {
     height: auto;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    size:2rem;
 }
 
 /* Footer */
 footer {
     text-align: center;
     padding: 1rem;
-    background-color: #1c1c24;
     color: #b3b3b3;
     font-size: 0.9rem;
     margin-top: 2rem;
